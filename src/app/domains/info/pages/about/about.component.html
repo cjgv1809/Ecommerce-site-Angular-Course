@@ -1,0 +1,34 @@
+<!-- <input
+  type="number"
+  [value]="duration()"
+  (change)="changeDuration($event)"
+  aria-label="Duration"
+  class="w-full p-2 border rounded-lg"
+/>
+
+<input
+  type="text"
+  [value]="message()"
+  (change)="changeMessage($event)"
+  aria-label="Message"
+  class="w-full p-2 border rounded-lg"
+/> -->
+
+<div class="p-5 my-4">
+  <h1 class="text-xl font-bold">About</h1>
+  <p class="text-lg text-gray-500">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    <span highlight>Quisquam voluptates, quidem, quod, </span>quos quas quae
+    quibusdam voluptatum exercitationem doloribus doloremque nemo autem.
+    Quisquam voluptates, quidem, quod, quos quas quae quibusdam voluptatum
+    exercitationem doloribus doloremque nemo autem.
+  </p>
+  <p class="text-sm text-gray-400">
+    Number of clients @if (duration() > 0) {
+    <app-counter [duration]="duration()" [message]="message()" />
+    }
+  </p>
+  <div>
+    <app-wave-audio audioUrl="assets/audio.mp3" />
+  </div>
+</div>
