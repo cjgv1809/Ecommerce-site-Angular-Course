@@ -1,0 +1,13 @@
+<div>
+  <!-- this is a reference to the element -->
+  <div #waveform class="my-5"></div>
+  @if (isPlaying()) {
+  <button (click)="playPause()" class="p-2 text-white bg-blue-500 rounded-lg">
+    Pause
+  </button>
+  } @else {
+  <button (click)="playPause()" class="p-2 text-white bg-green-500 rounded-lg">
+    Play
+  </button>
+  }
+</div>
