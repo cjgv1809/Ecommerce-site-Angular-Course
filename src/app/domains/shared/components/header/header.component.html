@@ -1,0 +1,135 @@
+<nav class="sticky top-0 z-40 text-white bg-slate-950/45">
+  <div
+    class="flex flex-wrap items-center justify-between w-full max-w-screen-xl p-4 mx-auto"
+  >
+    <div class="flex items-center space-x-8">
+      <a routerLink="/" class="flex items-center">
+        <img
+          src="https://flowbite.com/docs/images/logo.svg"
+          class="h-6 mr-3"
+          alt="Flowbite Logo"
+        />
+        <span
+          class="self-center hidden text-xl font-semibold whitespace-nowrap sm:block"
+          >Flowbite</span
+        >
+      </a>
+      <ul class="flex items-center gap-4">
+        <li>
+          <a
+            routerLink="/"
+            routerLinkActive="underline"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="block underline hover:underline"
+            aria-current="page"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/about"
+            routerLinkActive="underline"
+            class="block hover:underline"
+            >About</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/services"
+            routerLinkActive="underline"
+            class="block hover:underline"
+            >Services</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="flex items-center">
+      <button class="relative p-2 border rounded-lg" (click)="toggleSideMenu()">
+        <span
+          class="absolute flex items-center justify-center w-5 h-5 p-2 text-sm font-semibold text-white rounded-full -top-2 -right-2 bg-slate-950"
+          >{{ cart().length }}</span
+        >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div
+  class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform bg-white border-l-4 bg-red w-72"
+  [class.translate-x-full]="hideSideMenu()"
+>
+  <div class="flex items-center justify-between">
+    <p class="text-xl font-semibold">Shopping Cart</p>
+    <button (click)="toggleSideMenu()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+  </div>
+  <div>
+    @for (product of cart(); track product.id) {
+    <div class="flex items-center justify-between mt-4">
+      <div class="flex items-center space-x-4">
+        <img
+          [src]="product.image"
+          [alt]="product.title"
+          class="object-cover w-12 rounded-lg"
+        />
+        <div>
+          <p class="text-sm font-semibold">{{ product.title }}</p>
+          <p class="text-sm text-gray-500">${{ product.price }}</p>
+        </div>
+      </div>
+      <button
+        class="p-2 ml-2 text-sm font-semibold text-white transition bg-red-400 rounded-lg hover:bg-red-500"
+        (click)="removeFromCart(product)"
+        type="button"
+        title="Remove from cart"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.52.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5ZM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4ZM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5Zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
+    </div>
+    }
+  </div>
+  <hr class="my-4" />
+  <div class="flex items-center justify-between">
+    <p class="text-lg font-semibold">Total</p>
+    <p class="text-lg font-semibold">${{ total() }}</p>
+  </div>
+</div>
